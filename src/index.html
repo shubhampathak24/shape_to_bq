@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GeoData Pipeline - Shapefile to BigQuery</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>" />
+
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https: data:;
+    style-src 'self' 'unsafe-inline' https: data:;
+    font-src 'self' https: data:;
+    connect-src 'self' https: data:;
+    frame-src https:;
+    img-src 'self' data: https:;
+    object-src 'none';
+    base-uri 'self';
+  ">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script>
+    // This is a workaround for a bug in the shpjs library
+    // that causes a "global is not defined" error.
+    if (typeof global === 'undefined') {
+      var global = window;
+    }
+  </script>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
