@@ -1,7 +1,4 @@
-import React, { lazy, Suspense } from 'react';
-
-// Import KeplerMap with React.lazy for code splitting
-const KeplerMap = lazy(() => import('./KeplerMap'));
+import React from 'react';
 
 interface KeplerPreviewProps {
   geojson: any;
@@ -18,23 +15,25 @@ const KeplerPreview: React.FC<KeplerPreviewProps> = ({
 }) => {
   return (
     <div style={{ position: 'relative', width, height }}>
-      <Suspense fallback={<div style={{
+      <div style={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
         background: '#f7f7f7',
         color: '#666',
-        fontSize: '16px'
-      }}>Loading map...</div>}>
-        <KeplerMap
-          data={geojson}
-          height={height}
-          width={width}
-          onMapLoad={onMapLoad}
-          mapboxApiAccessToken="" // Not needed for OSM tiles
-        />
-      </Suspense>
+        fontSize: '16px',
+        border: '1px solid #ddd',
+        borderRadius: '8px'
+      }}>
+        <div className="text-center">
+          <div className="mb-4">🗺️</div>
+          <div>Map Preview</div>
+          <div className="text-sm text-gray-500 mt-2">
+            {geojson ? `${geojson.features?.length || 0} features loaded` : 'No data to display'}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

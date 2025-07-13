@@ -1,3 +1,11 @@
+export interface AuthUser {
+  id: string;
+  email: string;
+  name: string;
+  avatar?: string;
+  provider: 'google' | 'demo';
+}
+
 export interface User {
   id: string;
   email: string;
@@ -21,7 +29,7 @@ export interface Job {
   endTime?: Date;
   errorMessage?: string;
   logs: JobLog[];
-  bigQueryJobId?: string; // Store BigQuery job ID for manual status checking
+  bigQueryJobId?: string;
   previewGeoJson?: any;
 }
 
@@ -48,8 +56,7 @@ export interface ProcessingConfig {
   targetTable: string;
   autoDetectSchema: boolean;
   customSchema?: SchemaField[];
-  integerColumns?: string;
-  // PostgreSQL specific fields
+  integerColumns?: string[];
   pgHost?: string;
   pgPort?: number;
   pgDatabase?: string;
@@ -89,3 +96,5 @@ export interface BigQueryJobStatus {
     };
   };
 }
+
+export type JobStatus = 'pending' | 'uploading' | 'processing' | 'loading' | 'completed' | 'failed';
